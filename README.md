@@ -1,50 +1,87 @@
-# React + TypeScript + Vite
+# Vite React TypeScript Authentication App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a simple authentication system built with Vite, React, TypeScript, and React Router. It demonstrates basic login functionality and protected routes.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Vite for fast development and building
+- React with TypeScript for type-safe components
+- React Router for navigation and protected routes
+- Tailwind CSS for responsive styling
+- Simple authentication system (username/password)
+- Public and private pages
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Before you begin, ensure you have the following installed:
+- Node.js (v14 or later)
+- npm (v6 or later)
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/your-repo-name.git
+   cd your-repo-name
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+## Running the Application
+
+To start the development server:
+```
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Building for Production
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+To create a production build:
 ```
+npm run build
+```
+
+The built files will be in the `dist` directory.
+
+## Project Structure
+
+- `src/components`: Reusable React components
+- `src/pages`: Individual page components
+- `src/App.tsx`: Main application component and routing setup
+- `src/main.tsx`: Entry point of the application
+
+## Authentication
+
+The app uses a simple authentication system:
+- Username: Irtaza
+- Password: apple
+
+Only users with these credentials can access the Dashboard page.
+
+## Pages
+
+- Home: Public page accessible to all users
+- About: Public page accessible to all users
+- Login: Authentication page
+- Dashboard: Private page only accessible to authenticated users
+
+## Technologies Used
+
+- React
+- TypeScript
+- Vite
+- React Router
+- Tailwind CSS
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
