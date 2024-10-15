@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 interface LoginProps {
-  onLogin: (username: string, password: string) => boolean;
+  onLogin: (username: string, password: string) => Promise<boolean>;
 }
 
 const Login: React.FC<LoginProps> = ({ onLogin }) => {
@@ -14,6 +14,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(""); // Clear previous error messages
+    
     try {
       const isAuthenticated = await onLogin(username, password);
       if (isAuthenticated) {
@@ -21,8 +22,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       } else {
         setError("Invalid username or password");
       }
-    } catch (error: any) {
-      setError(error.message || "Something went wrong.");
+    } catch (error) {
+      setError(`An error occurred during login: ${(error as Error).message}`);
     }
   };
 
@@ -44,6 +45,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             required
             aria-label="Username"
           />
+        </div>
+        <div className="mb-4">
           <label htmlFor="password" className="block mb-2">
             Password:
           </label>

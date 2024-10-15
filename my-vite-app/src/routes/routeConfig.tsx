@@ -15,7 +15,7 @@ interface RouteConfig {
 export const publicRoutes: RouteConfig[] = [
   { path: '/', element: <Home /> },
   { path: '/about', element: <About /> },
-  { path: '/login', element: <Login onLogin={() => {}} /> },
+  { path: '/login', element: <Login /> },
   { path: '/forgot-password', element: <ForgotPassword /> },
 ];
 
