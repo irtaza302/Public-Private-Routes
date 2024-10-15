@@ -6,7 +6,7 @@ interface NavbarProps {
   onLogout: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, onLogout }) => {
+const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, onLogout }) => { 
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -22,6 +22,7 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, onLogout }) => {
           {isAuthenticated ? (
             <>
               <Link to="/dashboard" className="text-white hover:text-gray-300">Dashboard</Link>
+              <Link to="/profile" className="text-white hover:text-gray-300">Profile</Link>
               <button onClick={handleLogout} className="text-white hover:text-gray-300">Logout</button>
             </>
           ) : (

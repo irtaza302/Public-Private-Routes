@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 interface LoginProps {
   onLogin: (username: string, password: string) => boolean;
 }
@@ -62,6 +63,9 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         >
           Login
         </button>
+        <Link to="/forgot-password" className="block mt-4 text-blue-500 hover:text-blue-600">
+          Forgot Password?
+        </Link>
       </form>
     </div>
   );

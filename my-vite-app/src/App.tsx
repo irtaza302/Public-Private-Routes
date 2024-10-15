@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import React, { useState, useEffect, useCallback } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
-import Home from './pages/Home';
-import About from './pages/About';
-import Dashboard from './pages/Dashboard';
+import { publicRoutes, privateRoutes } from './routes/routeConfig';
 import Login from './pages/Login';
 
 const App: React.FC = () => {
@@ -16,19 +14,19 @@ const App: React.FC = () => {
     setIsAuthenticated(authStatus === 'true');
   }, []);
 
-  const handleLogin = (username: string, password: string): boolean => {
+  const handleLogin = useCallback((username: string, password: string): boolean => {
     if (username === 'Irtaza' && password === 'apple') {
       setIsAuthenticated(true);
       localStorage.setItem('isAuthenticated', 'true');
       return true;
     }
     return false;
-  };
+  }, []);
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     setIsAuthenticated(false);
     localStorage.removeItem('isAuthenticated');
-  };
+  }, []);
 
   return (
     <Router>
@@ -36,13 +34,19 @@ const App: React.FC = () => {
         <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
         <Routes>
           <Route element={<PublicRoute isAuthenticated={isAuthenticated} />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/login" element={<Login onLogin={handleLogin} />} />
+            {publicRoutes.map((route) => (
+              route.path !== '/login' ? (
+                <Route key={route.path} path={route.path} element={route.element} />
+              ) : null
+            ))}
           </Route>
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
           <Route element={<PrivateRoute isAuthenticated={isAuthenticated} />}>
-            <Route path="/dashboard" element={<Dashboard />} />
+            {privateRoutes.map((route) => (
+              <Route key={route.path} path={route.path} element={route.element} />
+            ))}
           </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
     </Router>
