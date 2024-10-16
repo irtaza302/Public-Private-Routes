@@ -5,6 +5,7 @@ import PrivateRoute from './components/PrivateRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import { publicRoutes, privateRoutes } from './routes/routeConfig';
 import LoginWrapper from './pages/LoginWrapper';
+import ErrorBoundary from './components/ErrorBoundary';
 
 
 const App: React.FC = () => {
@@ -31,49 +32,51 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-100">
-        <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
-        <Routes>
-          <Route element={<AuthenticatedRoute isAuthenticated={isAuthenticated} />}>
-            {publicRoutes.map((route) => (
+    <ErrorBoundary>
+      <Router>
+        <div className="min-h-screen bg-gray-100">
+          <Navbar isAuthenticated={isAuthenticated} onLogout={handleLogout} />
+          <Routes>
+            <Route element={<AuthenticatedRoute isAuthenticated={isAuthenticated} />}>
+              {publicRoutes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={
+                    route.path === '/login' ? (
+                      <LoginWrapper onLogin={handleLogin} />
+                    ) : (
+                      route.element
+                    )
+                  }
+                />
+              ))}
+            </Route>
+            {privateRoutes.map((route) => (
               <Route
                 key={route.path}
                 path={route.path}
                 element={
-                  route.path === '/login' ? (
-                    <LoginWrapper onLogin={handleLogin} />
-                  ) : (
-                    route.element
-                  )
+                  <PrivateRoute isAuthenticated={isAuthenticated}>
+                    {route.element}
+                  </PrivateRoute>
                 }
               />
             ))}
-          </Route>
-          {privateRoutes.map((route) => (
-            <Route
-              key={route.path}
-              path={route.path}
+            <Route 
+              path="*" 
               element={
-                <PrivateRoute isAuthenticated={isAuthenticated}>
-                  {route.element}
-                </PrivateRoute>
-              }
+                isAuthenticated ? (
+                  <Navigate to="/dashboard" replace />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              } 
             />
-          ))}
-          <Route 
-            path="*" 
-            element={
-              isAuthenticated ? (
-                <Navigate to="/dashboard" replace />
-              ) : (
-                <Navigate to="/login" replace />
-              )
-            } 
-          />
-        </Routes>
-      </div>
-    </Router>
+          </Routes>
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 };
 

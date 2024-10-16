@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ALERTS } from '../constants/alerts';
 
 const ForgotPassword: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -7,7 +8,7 @@ const ForgotPassword: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Here you would typically send a request to your backend to handle the password reset
-    setMessage(`Password reset link sent to ${email}`);
+    setMessage(ALERTS.PASSWORD_RESET_SENT);
   };
 
   return (

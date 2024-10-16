@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { ALERTS } from '../constants/alerts';
 
 interface LoginProps {
   onLogin: (username: string, password: string) => Promise<boolean>;
@@ -20,10 +21,11 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
       if (isAuthenticated) {
         navigate("/dashboard");
       } else {
-        setError("Invalid username or password");
+        setError(ALERTS.LOGIN_ERROR);
       }
     } catch (error) {
-      setError(`An error occurred during login: ${(error as Error).message}`);
+      setError(ALERTS.GENERAL_ERROR);
+      console.error('Login error:', error);
     }
   };
 
