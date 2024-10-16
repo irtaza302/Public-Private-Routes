@@ -1,15 +1,18 @@
 # Vite React TypeScript Authentication App
 
-This project is a simple authentication system built with Vite, React, TypeScript, and React Router. It demonstrates basic login functionality and protected routes.
+This project demonstrates a robust authentication system built with Vite, React, TypeScript, and React Router. It showcases login functionality, protected routes, and responsive design using Tailwind CSS.
 
 ## Features
 
-- Vite for fast development and building
+- Fast development and building with Vite
 - React with TypeScript for type-safe components
 - React Router for navigation and protected routes
 - Tailwind CSS for responsive styling
 - Simple authentication system (username/password)
 - Public and private pages
+- Error boundary for graceful error handling
+- Forgot password functionality
+- User profile page
 
 ## Prerequisites
 
@@ -52,6 +55,8 @@ The built files will be in the `dist` directory.
 
 - `src/components`: Reusable React components
 - `src/pages`: Individual page components
+- `src/routes`: Route configuration
+- `src/constants`: Constant values used across the app
 - `src/App.tsx`: Main application component and routing setup
 - `src/main.tsx`: Entry point of the application
 
@@ -61,7 +66,7 @@ The app uses a simple authentication system:
 - Username: Irtaza
 - Password: apple
 
-Only users with these credentials can access the Dashboard page.
+Only users with these credentials can access the private pages.
 
 ## Pages
 
@@ -69,14 +74,24 @@ Only users with these credentials can access the Dashboard page.
 - About: Public page accessible to all users
 - Login: Authentication page
 - Dashboard: Private page only accessible to authenticated users
+- User Profile: Private page showing user information
+- Forgot Password: Public page for password reset functionality
 
 ## Technologies Used
 
-- React
+- React 18
 - TypeScript
 - Vite
-- React Router
+- React Router 6
 - Tailwind CSS
+- ESLint for code linting
+
+## Key Components
+
+- ErrorBoundary: Catches and handles errors gracefully
+- PrivateRoute: Protects routes that require authentication
+- AuthenticatedRoute: Redirects authenticated users from public routes
+- Navbar: Navigation component with conditional rendering based on auth status
 
 ## Contributing
 
