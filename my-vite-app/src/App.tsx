@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import AuthenticatedRoute from './components/AuthenticatedRoute';
 import { publicRoutes, privateRoutes } from './routes/routeConfig';
-import Login from './pages/Login';
+import LoginWrapper from './pages/LoginWrapper';
 
 
 const App: React.FC = () => {
@@ -42,7 +42,7 @@ const App: React.FC = () => {
                 path={route.path}
                 element={
                   route.path === '/login' ? (
-                    <Login onLogin={handleLogin} />
+                    <LoginWrapper onLogin={handleLogin} />
                   ) : (
                     route.element
                   )
@@ -61,7 +61,16 @@ const App: React.FC = () => {
               }
             />
           ))}
-          <Route path="*" element={<Navigate to={isAuthenticated ? '/dashboard' : '/'} replace />} />
+          <Route 
+            path="*" 
+            element={
+              isAuthenticated ? (
+                <Navigate to="/dashboard" replace />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            } 
+          />
         </Routes>
       </div>
     </Router>

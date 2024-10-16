@@ -1,7 +1,7 @@
 import React from 'react';
 import Home from '../pages/Home';
 import About from '../pages/About';
-import Login from '../pages/Login';
+import LoginWrapper from '../pages/LoginWrapper';
 import ForgotPassword from '../pages/ForgotPassword';
 import Dashboard from '../pages/Dashboard';
 import UserProfile from '../pages/UserProfile';
@@ -15,7 +15,7 @@ interface RouteConfig {
 export const publicRoutes: RouteConfig[] = [
   { path: '/', element: <Home /> },
   { path: '/about', element: <About /> },
-  { path: '/login', element: <Login /> },
+  { path: '/login', element: <LoginWrapper onLogin={() => Promise.resolve(false)} /> },
   { path: '/forgot-password', element: <ForgotPassword /> },
 ];
 
