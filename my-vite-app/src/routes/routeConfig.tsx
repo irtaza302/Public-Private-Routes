@@ -5,6 +5,7 @@ import LoginWrapper from '../pages/LoginWrapper';
 import ForgotPassword from '../pages/ForgotPassword';
 import Dashboard from '../pages/Dashboard';
 import UserProfile from '../pages/UserProfile';
+import ErrorPage from '../pages/ErrorPage';
 
 interface RouteConfig {
   path: string;
@@ -17,6 +18,7 @@ export const publicRoutes: RouteConfig[] = [
   { path: '/about', element: <About /> },
   { path: '/login', element: <LoginWrapper onLogin={() => Promise.resolve(false)} /> },
   { path: '/forgot-password', element: <ForgotPassword /> },
+  { path: '/error', element: <ErrorPage error={new Error('Default error message')} /> },
 ];
 
 export const privateRoutes: RouteConfig[] = [
